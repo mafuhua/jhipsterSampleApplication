@@ -1,0 +1,81 @@
+<div>
+    <h2>
+        <span>Task 2 S</span>
+        <button class="btn btn-primary float-right jh-create-entity create-task-2-my-suffix" [routerLink]="['/', { outlets: { popup: ['task-2-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Task 2
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="task2S">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>App Id</span></th>
+            <th><span>Name</span></th>
+            <th><span>Desce</span></th>
+            <th><span>Wx Appid</span></th>
+            <th><span>Title</span></th>
+            <th><span>Description</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let task2 of task2S ;trackBy: trackId">
+                <td><a [routerLink]="['../task-2-my-suffix', task2.id ]">{{task2.id}}</a></td>
+                <td>{{task2.appId}}</td>
+                <td>{{task2.name}}</td>
+                <td>{{task2.desce}}</td>
+                <td>{{task2.wxAppid}}</td>
+                <td>{{task2.title}}</td>
+                <td>{{task2.description}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../task-2-my-suffix', task2.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'task-2-my-suffix/'+ task2.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'task-2-my-suffix/'+ task2.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
